@@ -41,5 +41,14 @@ public class ColaboratosController {
 		//http2.Request();
 		return http.getHeroes();
 	}
+	@GetMapping("/collaborators/api")
+	@ApiOperation(value = "Lista de los heroes")
+	@ResponseStatus(HttpStatus.OK)
+	public String getSaludo() {
+		 //http.Request();
+	     
+		//http2.Request();
+		return "Saludos";
+	}
 
 }
