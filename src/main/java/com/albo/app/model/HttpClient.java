@@ -29,6 +29,9 @@ import javax.ws.rs.core.Response;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -80,7 +83,11 @@ public class HttpClient {
 	
 	public void getHeroes() {
 		RestTemplate restTemplate = new RestTemplate();
-		String obj = restTemplate.getForObject("http://54.69.118.16:8090/api/empleados", String.class);
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("api_key","2517bfbf1ca4b71db4bc636f266bbed5");
+		HttpEntity entity = new HttpEntity(headers);
+		ResponseEntity<String> obj = restTemplate.exchange("http://54.69.118.16:8090/api/empleados", HttpMethod.GET,entity ,String.class);
+		
 		System.out.println(obj);
 	}
 
