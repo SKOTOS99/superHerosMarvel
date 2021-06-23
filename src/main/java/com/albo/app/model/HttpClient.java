@@ -1,13 +1,18 @@
 package com.albo.app.model;
 
+import com.albo.app.entity.HeroesEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -24,9 +29,9 @@ import javax.ws.rs.core.Response;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import ch.qos.logback.core.net.server.Client;
+import org.springframework.web.client.RestTemplate;
 
 
 @Service
@@ -34,15 +39,49 @@ public class HttpClient {
 	
 	
 	public void Request() {
-		
+		String URL = "http://54.69.118.16:8090/api/empleados";
 		String res = "";
+		String output;
 		
 		try {
-			Client client = ClientBuilder.newClient();
-		}
+
+            //URL url = new URL("http://54.69.118.16:8090/api/empleados");//your url i.e fetch data from .
+			URL url = new URL("http://gateway.marvel.com/v1/public/characters");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("api_key", "80d884a401a2822fc458d761e4ad6cfed9b4f338");
+            if (conn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP Error code : "
+                        + conn.getResponseCode());
+            }
+            InputStreamReader in = new InputStreamReader(conn.getInputStream());
+            BufferedReader br = new BufferedReader(in);
+            
+            while ((output = br.readLine()) != null) {
+            	
+                System.out.println(output);
+               
+            }
+          
+            //convert java object to JSON format
+            //String json = gson.toJson(output);
+            
+            conn.disconnect();
+
+        } catch (Exception e) {
+            System.out.println("Exception in NetClientGet:- " + e);
+        }
 		
 		
 		
+		
+	}
+	
+	public void getHeroes() {
+		RestTemplate restTemplate = new RestTemplate();
+		String obj = restTemplate.getForObject("http://54.69.118.16:8090/api/empleados", String.class);
+		System.out.println(obj);
 	}
 
 }

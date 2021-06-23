@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.albo.app.entity.HeroesEntity;
 import com.albo.app.model.HttpClient;
 
 import io.swagger.annotations.ApiOperation;
@@ -23,13 +24,15 @@ public class ColaboratosController {
 	private HttpClient http;
 	
 	
+	
+	
 	@GetMapping("/proveedores")
 	@ApiOperation(value = "Lista de los proveedores")
 	@ResponseStatus(HttpStatus.OK)
 	public String getColaborators() {
 		 String url = "/v1/public/characters";
 		 http.Request();
-	     
+	     http.getHeroes();
 		 
 		return "hola";
 	}
