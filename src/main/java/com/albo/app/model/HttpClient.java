@@ -18,6 +18,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -42,6 +45,7 @@ public class HttpClient {
 	
 	
 	public void Request() {
+		//https://gateway.marvel.com:443/v1/public/characters/1009368/comics?orderBy=title&limit=100&offset=0&apikey=2517bfbf1ca4b71db4bc636f266bbed5
 		String URL = "http://54.69.118.16:8090/api/empleados";
 		String res = "";
 		String output;
@@ -53,7 +57,7 @@ public class HttpClient {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("api_key", "80d884a401a2822fc458d761e4ad6cfed9b4f338");
+            conn.setRequestProperty("apikey", "2517bfbf1ca4b71db4bc636f266bbed5");
             if (conn.getResponseCode() != 200) {
                 throw new RuntimeException("Failed : HTTP Error code : "
                         + conn.getResponseCode());
@@ -75,19 +79,13 @@ public class HttpClient {
         } catch (Exception e) {
             System.out.println("Exception in NetClientGet:- " + e);
         }
-		
-		
-		
+
 		
 	}
 	
 	public void getHeroes() {
 		RestTemplate restTemplate = new RestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("api_key","2517bfbf1ca4b71db4bc636f266bbed5");
-		HttpEntity entity = new HttpEntity(headers);
-		ResponseEntity<String> obj = restTemplate.exchange("http://54.69.118.16:8090/api/empleados", HttpMethod.GET,entity ,String.class);
-		
+		String obj = restTemplate.getForObject("http://gateway.marvel.com/v1/public/characters", String.class);
 		System.out.println(obj);
 	}
 

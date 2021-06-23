@@ -1,7 +1,9 @@
 package com.albo.app.service;
 
-public interface getHeroes {
+import java.util.Map;
+
+public interface GetHeroes {
 	
-	public void getHeroes();
+	public Map<String,Object> getHeroes();
 
 }
