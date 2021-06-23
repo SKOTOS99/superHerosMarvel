@@ -12,11 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-public class GetHeroesImp implements GetHeroes {
+public class GetHeroesServImp implements GetHeroesServ {
 
-	
-	
-	
 	@Override
 	public Map<String, Object> getHeroes() {
 		

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.albo.app.entity.HeroesEntity;
 import com.albo.app.model.HttpClient;
-import com.albo.app.service.GetHeroes;
+import com.albo.app.service.GetHeroesServ;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 public class ColaboratosController {
 	
 	@Autowired
-	private GetHeroes http;
+	private GetHeroesServ http;
 	
 	@Autowired 
 	private HttpClient http2;
