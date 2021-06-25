@@ -3,6 +3,13 @@ package com.albo.app.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -36,5 +43,18 @@ public class GetHeroesServImp implements GetHeroesServ {
 		return listParams;
 		
 	}
+	
+	@Override
+	public Map<String, Object> getHeroesComics() {
+		//ClientConfig config = new ClientConfig();
+		Map<String,Object > listParams = new HashMap<>();
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://gateway.marvel.com/v1/public/characters");
+		Response response = target.path("my").path("resource").request().accept(MediaType.APPLICATION_JSON)
+		.header("apikey", "2517bfbf1ca4b71db4bc636f266bbed5").get();
+		listParams.put("data", response);
+		return listParams;
+	}
+	
 
 }
