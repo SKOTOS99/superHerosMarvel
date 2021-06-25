@@ -24,8 +24,8 @@ public class GetHeroesServImp implements GetHeroesServ {
 		HttpEntity entity = new HttpEntity(headers);
 		Map<String, String> apikey = new HashMap<>();
 		apikey.put("apikey","2517bfbf1ca4b71db4bc636f266bbed5" );
-		//ResponseEntity<String> obj = restTemplate.exchange("http://gateway.marvel.com/v1/public/characters", HttpMethod.GET,entity ,String.class);
-		String obj = restTemplate.getForObject("http://gateway.marvel.com/v1/public/characters", String.class, apikey);
+		ResponseEntity<String> obj = restTemplate.exchange("http://gateway.marvel.com/v1/public/characters", HttpMethod.GET,entity ,String.class);
+		//String obj = restTemplate.getForObject("http://gateway.marvel.com/v1/public/characters", String.class, apikey);
 		listParams.put("data", obj);
 		return listParams;
 		

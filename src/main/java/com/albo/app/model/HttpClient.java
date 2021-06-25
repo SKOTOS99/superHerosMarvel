@@ -40,6 +40,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
+
 @Service
 public class HttpClient {
 	
@@ -88,5 +89,7 @@ public class HttpClient {
 		String obj = restTemplate.getForObject("http://gateway.marvel.com/v1/public/characters", String.class);
 		System.out.println(obj);
 	}
+	
+
 
 }
